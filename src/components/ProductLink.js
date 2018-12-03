@@ -5,13 +5,13 @@ import { Link } from "react-router-dom";
 import { routes } from "../routes";
 import { formatRoute } from "react-router-named-routes";
 
-export const Product = ({ id, title }) => (
+export const ProductLink = ({ id, title }) => (
   <div>
     <Link to={formatRoute(routes.adminProduct, { id })}>{title}</Link>
   </div>
 );
 
-Product.T = {
+ProductLink.T = {
   id: T.number.isRequired,
   title: T.string.isRequired
 };

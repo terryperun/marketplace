@@ -1,12 +1,31 @@
 import React from "react";
+import { Route } from "react-router-dom";
 import T, { arrayOf, shape, string, number } from "prop-types";
-import { Product } from "../../components/ProductLink";
+import { ProductLink } from "../../components/ProductLink";
+import { routes } from "../../routes";
+import { ProductContainer } from "../../components/ProductComponent";
 
-export const AdminPage = ({ productList }) => (
+export const AdminPage = ({ productList, match, updateProduct }) => (
   <div>
-    {productList.map(({ title, id }) => (
-      <Product key={id} id={id} title={title} />
-    ))}
+    <Route
+      path={match.path}
+      exact
+      render={() =>
+        productList.map(({ title, id }) => (
+          <ProductLink key={id} id={id} title={title} />
+        ))
+      }
+    />
+    <Route
+      path={routes.adminProduct}
+      render={renderProps => (
+        <ProductContainer
+          productList={productList}
+          updateProduct={updateProduct}
+          {...renderProps}
+        />
+      )}
+    />
   </div>
 );
 
