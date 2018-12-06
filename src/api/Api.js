@@ -1,15 +1,20 @@
-import axios from "axios";
+import axios from 'axios';
 
 let _token = null;
 
-export const setToken = token => {
+export const setToken = (token) => {
   _token = token;
 
-  axios.defaults.headers.Authorization = _token ? `Barer ${_token}` : null;
+  axios.defaults.headers.Authorization = _token
+    ? `Barer ${_token}`
+    : null;
 };
 
 export const adminProducts = {
   fetchProducts() {
-    return axios.get("/api/v1/products");
-  }
+    return axios.get('/api/v1/products');
+  },
+  fetchProduct(id) {
+    return axios.get(`/api/v1/products/${id}`);
+  },
 };
