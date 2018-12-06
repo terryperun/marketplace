@@ -1,18 +1,20 @@
-import React from "react";
-import ProductListView from "./ProductListView";
-import * as Api from "../../../api/Api";
+import React from 'react';
+import ProductListView from './ProductListView';
+import * as Api from '../../../api/Api';
 
 class ProductListContainer extends React.Component {
   state = {
     products: [],
-    loading: true
+    loading: true,
   };
 
   async componentDidMount() {
-    const { data: products } = await Api.adminProducts.fetchProducts();
+    const {
+      data: products,
+    } = await Api.adminProducts.fetchProducts();
     this.setState({
       products,
-      loading: false
+      loading: false,
     });
   }
 

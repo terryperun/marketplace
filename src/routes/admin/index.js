@@ -1,24 +1,27 @@
-import React from "react";
-import { Route } from "react-router-dom";
-import { arrayOf, shape, string } from "prop-types";
+import React from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { arrayOf, shape, string } from 'prop-types';
 // import { ProductLink } from "../../components/ProductLink";
-import { routes } from "../../routes";
-import { ProductContainer } from "../../components/ProductComponent";
-import ProductList from "./ProductList/ProductListContainer";
+import { routes } from '../../routes';
+// import { ProductContainer } from '../../components/Product/ProductContainer';
+import ProductPageContainer from './ProductPage/ProductPageContainer';
+import ProductList from './ProductList/ProductListContainer';
 
 export const AdminPage = ({ productList, match, updateProduct }) => (
   <div>
-    <Route path={match.path} exact component={ProductList} />
-    <Route
-      path={routes.adminProduct}
-      render={renderProps => (
-        <ProductContainer
-          productList={productList}
-          updateProduct={updateProduct}
-          {...renderProps}
-        />
-      )}
-    />
+    <Switch>
+      <Route path={match.path} exact component={ProductList} />
+      <Route
+        path={routes.adminProduct}
+        render={(renderProps) => (
+          <ProductPageContainer
+            productList={productList}
+            updateProduct={updateProduct}
+            {...renderProps}
+          />
+        )}
+      />
+    </Switch>
   </div>
 );
 
@@ -29,7 +32,7 @@ AdminPage.T = {
       title: string.isRequired,
       description: string,
       image: string.isRequired,
-      price: string.isRequired
-    })
-  )
+      price: string.isRequired,
+    }),
+  ),
 };
